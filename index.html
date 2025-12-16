@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Nativeness Assessment</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <!-- Introduction Section -->
+  <section id="intro-section" class="section active">
+    <div class="container">
+      <div class="logo">
+        <img src="assets/logo.svg" alt="Hyperskill Training" class="logo-image">
+      </div>
+      
+      <h1>AI Nativeness Assessment</h1>
+      
+      <div class="intro-text">
+        <p>Most teams are already using AI in one way or another. The harder question is whether this use is intentional, sustainable, and aligned with where the team is heading next.</p>
+        
+        <p>This short assessment is designed as a practical self-check for team leads. It helps you step back and see how AI fits into your team's strategy, workflows, skills, and risks — not just today, but looking ahead to the next year.</p>
+        
+        <p>There are no "right" or "wrong" answers here. The value comes from noticing what is already working, where things are still fuzzy, and which areas might quietly become bottlenecks as AI usage grows.</p>
+        
+        <p>By the end, you'll get a clear snapshot of your team's AI readiness, a breakdown of strengths and gaps, and a thoughtful suggestion for what the most natural next step could be — whether that means alignment, deeper engineering practices, or practical workflow improvements.</p>
+        
+        <p class="emphasis">Take it as a pause for reflection, not a test.</p>
+      </div>
+      
+      <button id="start-btn" class="btn-primary">Start Assessment</button>
+    </div>
+  </section>
+
+  <!-- Survey Section -->
+  <section id="survey-section" class="section">
+    <div class="container">
+      <div class="survey-header">
+        <div class="progress-bar">
+          <div id="progress-fill" class="progress-fill"></div>
+        </div>
+        <div class="progress-text">
+          <span id="current-category">Category 1 of 9</span>
+          <span id="progress-percentage">0%</span>
+        </div>
+      </div>
+      
+      <div class="survey-content">
+        <h2 id="category-title" class="category-title"></h2>
+        
+        <div id="questions-container" class="questions-container">
+          <!-- Questions will be dynamically inserted here -->
+        </div>
+        
+        <div class="survey-navigation">
+          <button id="prev-btn" class="btn-secondary" disabled>Previous</button>
+          <button id="next-btn" class="btn-primary">Next Category</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Results Section -->
+  <section id="results-section" class="section">
+    <div class="container">
+      <div class="results-header">
+        <h1>Your AI Nativeness Profile</h1>
+        <div class="nativeness-score">
+          <div class="score-circle">
+            <svg width="200" height="200" viewBox="0 0 200 200">
+              <circle cx="100" cy="100" r="90" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="8"/>
+              <circle id="score-circle" cx="100" cy="100" r="90" fill="none" stroke="var(--accent-cyan)" stroke-width="8" stroke-linecap="round" transform="rotate(-90 100 100)" stroke-dasharray="565.48" stroke-dashoffset="565.48"/>
+            </svg>
+            <div class="score-content">
+              <div id="nativeness-percentage" class="score-number">0%</div>
+              <div id="nativeness-level" class="score-label">AI-Curious</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="results-content">
+        <div class="level-description">
+          <h2>About Your Current Level</h2>
+          <p id="level-description-text"></p>
+        </div>
+        
+        <div class="category-breakdown">
+          <h2>Category Breakdown</h2>
+          <div id="category-chart" class="category-chart">
+            <!-- Category scores will be dynamically inserted here -->
+          </div>
+        </div>
+        
+        <div id="patterns-section" class="patterns-section" style="display: none;">
+          <h2>Key Patterns Detected</h2>
+          <div id="patterns-container" class="patterns-container">
+            <!-- Patterns will be dynamically inserted here -->
+          </div>
+        </div>
+        
+        <div id="inconsistency-section" class="inconsistency-section" style="display: none;">
+          <h2>Areas with High Variance</h2>
+          <p class="section-description">These categories show significant variation in responses, suggesting uneven practices or knowledge within the team.</p>
+          <div id="inconsistency-container" class="inconsistency-container">
+            <!-- Inconsistent categories will be dynamically inserted here -->
+          </div>
+        </div>
+        
+        <div class="recommendation">
+          <h2>Recommended Next Step</h2>
+          <div class="recommendation-card">
+            <h3 id="recommended-product" class="product-name"></h3>
+            <div id="recommendation-text" class="recommendation-text"></div>
+          </div>
+        </div>
+        
+        <button id="restart-btn" class="btn-secondary">Take Assessment Again</button>
+      </div>
+    </div>
+  </section>
+
+  <script src="js/data.js"></script>
+  <script src="js/survey.js"></script>
+  <script src="js/scoring.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
