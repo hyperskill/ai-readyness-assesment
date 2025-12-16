@@ -1,0 +1,99 @@
+# AI Readiness Project - Development Rules
+
+## Core Technology Stack
+- **HTML5** only (semantic markup)
+- **Pure CSS3** (no preprocessors, no frameworks)
+- **Vanilla JavaScript** (ES6+, no frameworks or libraries)
+- **NO external libraries** unless absolutely critical (e.g., specific data visualization if needed)
+
+## Language Requirements
+- **ALL user-facing text MUST be in English only**
+- Code comments: English
+- Variable/function names: English
+- Documentation: English
+- UI labels, buttons, messages: English
+
+## File Structure
+- Keep a clean, organized folder structure:
+  - `/index.html` - main entry point
+  - `/css/` - all stylesheets
+  - `/js/` - all JavaScript files
+  - `/assets/` - images, fonts, icons
+  - `/pages/` - additional HTML pages if needed
+
+## HTML Guidelines
+- Use semantic HTML5 elements (`<header>`, `<nav>`, `<main>`, `<section>`, `<article>`, `<footer>`)
+- Keep markup clean and minimal
+- Use proper accessibility attributes (ARIA when needed)
+- NO inline styles or inline scripts
+- Use meaningful class and id names (kebab-case)
+
+## CSS Guidelines
+- Use CSS custom properties (variables) for theming
+- Mobile-first responsive design
+- Use modern CSS features: Grid, Flexbox, CSS Variables
+- NO CSS frameworks (no Bootstrap, Tailwind, etc.)
+- Organize styles logically (variables, reset, layout, components, utilities)
+- Use meaningful class names following BEM or similar methodology
+- Prefer `rem` and `em` units over `px` for better scalability
+
+## JavaScript Guidelines
+- Use modern ES6+ syntax (const/let, arrow functions, modules)
+- NO jQuery or other JS libraries
+- Use native DOM APIs (`querySelector`, `addEventListener`, etc.)
+- Keep code modular - separate concerns into different files/functions
+- Use async/await for asynchronous operations
+- Implement proper error handling
+- NO eval() or other unsafe practices
+
+## Performance
+- Optimize images before adding to project
+- Minimize HTTP requests
+- Keep CSS and JS files organized but not overly fragmented
+- Use native lazy loading for images when appropriate
+- Avoid unnecessary DOM manipulation
+
+## Browser Compatibility
+- Target modern browsers (last 2 versions)
+- Use standard web APIs that are widely supported
+- Test in Chrome, Firefox, Safari, Edge
+- Provide graceful degradation where needed
+
+## Code Quality
+- Write clean, readable, self-documenting code
+- Use consistent formatting and indentation (2 spaces)
+- Add comments only when necessary to explain "why", not "what"
+- Follow DRY principle (Don't Repeat Yourself)
+- Keep functions small and focused
+
+## Security
+- Sanitize user inputs
+- Use proper form validation
+- Implement CSP (Content Security Policy) headers when possible
+- NO inline event handlers (use addEventListener)
+
+## Deployment
+- All assets should be relative paths
+- Ensure project works when opened directly in browser
+- Consider adding a simple `README.md` for setup instructions
+
+## What to AVOID
+- ❌ NO React, Vue, Angular, or any JS frameworks
+- ❌ NO CSS frameworks (Bootstrap, Tailwind, Bulma, etc.)
+- ❌ NO jQuery or other DOM manipulation libraries
+- ❌ NO build tools unless absolutely necessary (no Webpack, Vite, etc.)
+- ❌ NO TypeScript (use vanilla JavaScript)
+- ❌ NO preprocessors (SASS, LESS, PostCSS)
+- ❌ NO icon libraries (use SVG directly or CSS-only icons)
+- ❌ NO text in Russian or other languages - ENGLISH ONLY
+
+## When Libraries ARE Acceptable
+Only use external libraries if:
+1. The functionality is extremely complex to implement from scratch
+2. It's a well-maintained, lightweight library
+3. There's a strong justification for its inclusion
+4. Must get explicit approval before adding
+
+## Exceptions
+If a specific feature absolutely requires a library (e.g., complex charts, maps), discuss with the user first before implementing.
+
