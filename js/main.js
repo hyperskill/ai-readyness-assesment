@@ -1,6 +1,7 @@
 // Main Application
 let surveyManager;
 let surveyUI;
+let userEmail = null;
 
 // Initialize application
 document.addEventListener('DOMContentLoaded', () => {
@@ -12,12 +13,18 @@ function initializeApp() {
   const introSection = document.getElementById('intro-section');
   const surveySection = document.getElementById('survey-section');
   const resultsSection = document.getElementById('results-section');
+  const emailGateModal = document.getElementById('email-gate-modal');
   
   // Get button elements
   const startBtn = document.getElementById('start-btn');
   const prevBtn = document.getElementById('prev-btn');
   const nextBtn = document.getElementById('next-btn');
   const restartBtn = document.getElementById('restart-btn');
+  const submitEmailBtn = document.getElementById('submit-email-btn');
+  
+  // Get email inputs
+  const introEmailInput = document.getElementById('intro-email');
+  const gateEmailInput = document.getElementById('gate-email');
   
   // Initialize survey manager
   surveyManager = new SurveyManager();
@@ -25,6 +32,13 @@ function initializeApp() {
   
   // Start button handler
   startBtn.addEventListener('click', () => {
+    // Capture email if provided
+    const email = introEmailInput.value.trim();
+    if (email && isValidEmail(email)) {
+      userEmail = email;
+      console.log('Email captured from intro:', userEmail);
+    }
+    
     showSection(surveySection);
     surveyUI.renderCategory();
   });
@@ -41,8 +55,14 @@ function initializeApp() {
     const isLastCategory = surveyManager.currentCategoryIndex === surveyManager.categories.length - 1;
     
     if (isLastCategory) {
-      // Show results
-      showResults(resultsSection);
+      // Check if email was provided
+      if (userEmail) {
+        // Email already captured, show results directly
+        showResults(resultsSection);
+      } else {
+        // Show email gate modal
+        showEmailGate(emailGateModal);
+      }
     } else {
       // Go to next category
       if (surveyManager.nextCategory()) {
@@ -51,12 +71,104 @@ function initializeApp() {
     }
   });
   
+  // Submit email from gate modal
+  submitEmailBtn.addEventListener('click', () => {
+    const email = gateEmailInput.value.trim();
+    const errorEl = document.getElementById('email-error');
+    
+    // Clear previous errors
+    gateEmailInput.classList.remove('error');
+    errorEl.classList.remove('show');
+    errorEl.textContent = '';
+    
+    if (!email) {
+      showEmailError(gateEmailInput, errorEl, 'Please enter your email address');
+      return;
+    }
+    
+    if (!isValidEmail(email)) {
+      showEmailError(gateEmailInput, errorEl, 'Please enter a valid email address');
+      return;
+    }
+    
+    userEmail = email;
+    console.log('Email captured from gate:', userEmail);
+    
+    // Hide modal and show results
+    hideEmailGate(emailGateModal);
+    showResults(resultsSection);
+  });
+  
+  // Allow Enter key to submit email in modal
+  gateEmailInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+      submitEmailBtn.click();
+    }
+  });
+  
+  // Clear error on input
+  gateEmailInput.addEventListener('input', () => {
+    const errorEl = document.getElementById('email-error');
+    gateEmailInput.classList.remove('error');
+    errorEl.classList.remove('show');
+  });
+  
   // Restart button handler
   restartBtn.addEventListener('click', () => {
     surveyManager.reset();
+    userEmail = null;
+    introEmailInput.value = '';
+    gateEmailInput.value = '';
+    
+    // Clear email errors
+    const errorEl = document.getElementById('email-error');
+    gateEmailInput.classList.remove('error');
+    if (errorEl) {
+      errorEl.classList.remove('show');
+      errorEl.textContent = '';
+    }
+    
     showSection(introSection);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
+}
+
+// Email validation
+function isValidEmail(email) {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+}
+
+// Show email error
+function showEmailError(inputEl, errorEl, message) {
+  inputEl.classList.add('error');
+  errorEl.textContent = message;
+  errorEl.classList.add('show');
+  inputEl.focus();
+}
+
+// Show email gate modal
+function showEmailGate(modal) {
+  modal.classList.add('active');
+  const emailInput = document.getElementById('gate-email');
+  const errorEl = document.getElementById('email-error');
+  
+  // Clear any previous errors
+  emailInput.classList.remove('error');
+  if (errorEl) {
+    errorEl.classList.remove('show');
+    errorEl.textContent = '';
+  }
+  
+  // Focus on input after a short delay to ensure modal is visible
+  setTimeout(() => {
+    emailInput.focus();
+  }, 100);
+}
+
+// Hide email gate modal
+function hideEmailGate(modal) {
+  modal.classList.remove('active');
 }
 
 // Show specific section

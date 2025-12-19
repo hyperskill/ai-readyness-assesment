@@ -92,6 +92,7 @@ class SurveyUI {
   initializeElements() {
     // Survey elements
     this.categoryTitleEl = document.getElementById('category-title');
+    this.categoryDescriptionEl = document.getElementById('category-description');
     this.questionsContainerEl = document.getElementById('questions-container');
     this.progressFillEl = document.getElementById('progress-fill');
     this.currentCategoryEl = document.getElementById('current-category');
@@ -107,6 +108,11 @@ class SurveyUI {
     
     // Update category title
     this.categoryTitleEl.textContent = category.name;
+    
+    // Update category description
+    if (this.categoryDescriptionEl && category.description) {
+      this.categoryDescriptionEl.textContent = category.description;
+    }
     
     // Update progress text
     this.currentCategoryEl.textContent = `Category ${categoryIndex + 1} of ${this.manager.categories.length}`;
