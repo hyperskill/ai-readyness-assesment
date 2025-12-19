@@ -4,6 +4,7 @@ const SURVEY_DATA = {
     {
       id: 'strategy-culture',
       name: 'Strategy & Culture',
+      description: 'How clear and aligned is your team on why, where, and how AI should be used.',
       questions: [
         'We can clearly explain why AI matters for our team next year.',
         'We understand which roles AI will support and which may change.',
@@ -15,6 +16,7 @@ const SURVEY_DATA = {
     {
       id: 'data-infrastructure',
       name: 'Data & Infrastructure',
+      description: 'Whether your data and systems are ready to support AI usage reliably and securely.',
       questions: [
         'We know which data is needed for our AI use cases.',
         'Our data is clean and up to date enough for AI use.',
@@ -26,6 +28,7 @@ const SURVEY_DATA = {
     {
       id: 'tools-automation',
       name: 'Tools & Automation',
+      description: 'How well AI tools are integrated into daily workflows and where they add real value.',
       questions: [
         'AI tools are part of our daily workflow.',
         'We know when AI helps and when it can mislead us.',
@@ -37,6 +40,7 @@ const SURVEY_DATA = {
     {
       id: 'skills-learning',
       name: 'Skills & Learning',
+      description: 'Whether your team has the skills needed to use AI effectively and knows where gaps exist.',
       questions: [
         'We know which AI skills are needed for each role in the team.',
         'Some team members can clearly and precisely give tasks to AI.',
@@ -48,6 +52,7 @@ const SURVEY_DATA = {
     {
       id: 'product-processes',
       name: 'Product & Processes',
+      description: 'How AI impacts product quality, user experience, and core business processes.',
       questions: [
         'We can point to where AI creates real value in our product or service.',
         'AI improves not only speed but also quality or user experience.',
@@ -59,6 +64,7 @@ const SURVEY_DATA = {
     {
       id: 'security-compliance',
       name: 'Security & Compliance',
+      description: 'Whether risks are understood, rules are clear, and responsibility is defined.',
       questions: [
         'The team understands risks of uncontrolled AI usage.',
         'We have clear rules on what data can and cannot be used with AI.',
@@ -70,6 +76,7 @@ const SURVEY_DATA = {
     {
       id: 'experimentation-innovation',
       name: 'Experimentation & Innovation',
+      description: 'How deliberately your team runs AI experiments and learns from them.',
       questions: [
         'We define AI experiments with clear expected outcomes.',
         'Experiments have time limits and success criteria.',
@@ -81,6 +88,7 @@ const SURVEY_DATA = {
     {
       id: 'integration-scaling',
       name: 'Integration & Scaling',
+      description: 'Whether AI solutions can be reused, maintained, and scaled beyond prototypes.',
       questions: [
         'AI solutions do not depend on a single key person.',
         'We can reuse AI solutions across teams with little effort.',
@@ -92,6 +100,7 @@ const SURVEY_DATA = {
     {
       id: 'impact-measurement',
       name: 'Impact Measurement',
+      description: 'How rigorously you measure AI results and make data-driven decisions about investments.',
       questions: [
         'We define success metrics before starting AI initiatives.',
         'We can show which improvements came specifically from AI.',

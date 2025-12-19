@@ -7,28 +7,75 @@
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
+  <!-- Header -->
+  <header class="site-header">
+    <div class="header-container">
+      <a href="https://bootcamps.hyperskill.org" target="_blank" rel="noopener noreferrer" class="header-logo-link">
+        <img src="assets/logo.svg" alt="Hyperskill Training" class="header-logo">
+      </a>
+    </div>
+  </header>
+
   <!-- Introduction Section -->
   <section id="intro-section" class="section active">
     <div class="container">
-      <div class="logo">
-        <img src="assets/logo.svg" alt="Hyperskill Training" class="logo-image">
-      </div>
+      <h1>How effectively does your team use AI at work?</h1>
       
-      <h1>AI Nativeness Assessment</h1>
+      <div class="social-proof-badge">
+        <svg class="badge-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24">
+          <path fill="url(#badge-gradient-1)" d="M20.571 21.086a1.2 1.2 0 0 1-1.2 1.2h-1.028a1.2 1.2 0 0 1-1.2-1.2V2.914a1.2 1.2 0 0 1 1.2-1.2h1.028a1.2 1.2 0 0 1 1.2 1.2v18.172Z"></path>
+          <path fill="url(#badge-gradient-2)" d="M13.714 9.086a1.2 1.2 0 0 1-1.2 1.2h-1.028a1.2 1.2 0 0 1-1.2-1.2V4.629a1.2 1.2 0 0 1 1.2-1.2h1.028a1.2 1.2 0 0 1 1.2 1.2v4.457Z"></path>
+          <path fill="url(#badge-gradient-3)" d="M6.857 15.943a1.2 1.2 0 0 1-1.2 1.2H4.63a1.2 1.2 0 0 1-1.2-1.2V8.057a1.2 1.2 0 0 1 1.2-1.2h1.028a1.2 1.2 0 0 1 1.2 1.2v7.886Z"></path>
+          <path fill="url(#badge-gradient-4)" d="M13.714 19.371a1.2 1.2 0 0 1-1.2 1.2h-1.028a1.2 1.2 0 0 1-1.2-1.2v-4.457a1.2 1.2 0 0 1 1.2-1.2h1.028a1.2 1.2 0 0 1 1.2 1.2v4.457Z"></path>
+          <defs>
+            <linearGradient id="badge-gradient-1" x1="19.473" x2="25.575" y1="6.484" y2="12.083" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#564DE2"></stop>
+              <stop offset="1" stop-color="#68AEFF"></stop>
+            </linearGradient>
+            <linearGradient id="badge-gradient-2" x1="10.286" x2="16.159" y1="-.052" y2="4.76" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#6C63FF"></stop>
+              <stop offset="1" stop-color="#7AB7FE"></stop>
+            </linearGradient>
+            <linearGradient id="badge-gradient-3" x1="5.913" x2="-.81" y1="19.012" y2="13.484" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#4BFFDF"></stop>
+              <stop offset="1" stop-color="#7AB7FE"></stop>
+            </linearGradient>
+            <linearGradient id="badge-gradient-4" x1="13.119" x2="6.661" y1="24.533" y2="18.421" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#4BFFDF"></stop>
+              <stop offset="1" stop-color="#4D9FFF"></stop>
+            </linearGradient>
+          </defs>
+        </svg>
+        <span>Over 100 team leads have already assessed their teams</span>
+      </div>
       
       <div class="intro-text">
-        <p>Most teams are already using AI in one way or another. The harder question is whether this use is intentional, sustainable, and aligned with where the team is heading next.</p>
+        <p class="intro-lead">Nearly every team today uses AI.<br>Far fewer use it deliberately, consistently and in a way that will scale.</p>
         
-        <p>This short assessment is designed as a practical self-check for team leads. It helps you step back and see how AI fits into your team's strategy, workflows, skills, and risks — not just today, but looking ahead to the next year.</p>
+        <p class="intro-subtitle">This 10-minute team assessment helps you quickly check:</p>
         
-        <p>There are no "right" or "wrong" answers here. The value comes from noticing what is already working, where things are still fuzzy, and which areas might quietly become bottlenecks as AI usage grows.</p>
-        
-        <p>By the end, you'll get a clear snapshot of your team's AI readiness, a breakdown of strengths and gaps, and a thoughtful suggestion for what the most natural next step could be — whether that means alignment, deeper engineering practices, or practical workflow improvements.</p>
-        
-        <p class="emphasis">Take it as a pause for reflection, not a test.</p>
+        <ul class="intro-list">
+          <li>how intentional your team's AI usage really is</li>
+          <li>where value is leaking: strategy, skills, tooling, data infrastructure, security, experimentation, integration, product impact and measurement</li>
+          <li>how prepared your team is for the next 12 months</li>
+        </ul>
       </div>
       
-      <button id="start-btn" class="btn-primary">Start Assessment</button>
+      <div class="cta-block">
+        <div class="cta-block-content">
+          <label for="intro-email" class="cta-label">Leave your email to receive complete results <span class="optional-tag">(optional)</span></label>
+          <div class="cta-input-group">
+            <input 
+              type="email" 
+              id="intro-email" 
+              class="cta-email-input" 
+              placeholder="your.email@company.com"
+              autocomplete="email"
+            >
+            <button id="start-btn" class="btn-cta">Start Assessment</button>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -47,6 +94,7 @@
       
       <div class="survey-content">
         <h2 id="category-title" class="category-title"></h2>
+        <p id="category-description" class="category-description"></p>
         
         <div id="questions-container" class="questions-container">
           <!-- Questions will be dynamically inserted here -->
@@ -59,6 +107,29 @@
       </div>
     </div>
   </section>
+
+  <!-- Email Gate Modal -->
+  <div id="email-gate-modal" class="modal">
+    <div class="modal-content">
+      <h2>One More Step</h2>
+      <p class="modal-description">Enter your email to see your complete AI readiness results</p>
+      
+      <div class="modal-email-form">
+        <div class="email-input-wrapper">
+          <input 
+            type="email" 
+            id="gate-email" 
+            class="email-input" 
+            placeholder="your.email@company.com"
+            autocomplete="email"
+            required
+          >
+          <div id="email-error" class="email-error"></div>
+        </div>
+        <button id="submit-email-btn" class="btn-primary">Submit email address to see results</button>
+      </div>
+    </div>
+  </div>
 
   <!-- Results Section -->
   <section id="results-section" class="section">
@@ -119,6 +190,18 @@
       </div>
     </div>
   </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-content">
+        <a href="https://bootcamps.hyperskill.org" target="_blank" rel="noopener noreferrer" class="footer-link">
+          <img src="assets/logo.svg" alt="Hyperskill Training" class="footer-logo">
+        </a>
+        <p class="footer-text">© Hyperskill Training. Empowering teams with AI-driven education.</p>
+      </div>
+    </div>
+  </footer>
 
   <script src="js/data.js"></script>
   <script src="js/survey.js"></script>
