@@ -21,11 +21,16 @@ This redesign fixes those gaps by adding context, comparison, and qualitative in
 **The Solution:** We added a **market position visualization** based on the "Diffusion of Innovation" model:
 
 - Shows five segments: Innovators (2.5%), Early Adopters (13.5%), Early Majority (34%), Late Majority (34%), and Laggards (16%)
-- Places the team's score on this curve with a visual marker
-- Explains what each position means in plain language
+- Highlights the team's current segment visually (active segment stands out)
+- Each segment shows its market share percentage
+- Explains what each position means in the benchmark card below
 - Shows percentile ranking: "You're ahead of 50% of software teams"
 
 **Why This Matters:** People can now immediately see whether they're leading, following, or just starting their AI journey. A 38% score becomes "Early Majority — ahead of half the market."
+
+**Design Decisions:**
+- **No "You are here" marker** — The active segment highlighting is sufficient; extra markers add visual clutter
+- **Simple, clean visualization** — Focus on the curve and relative position, not decorative elements
 
 ---
 
@@ -33,15 +38,21 @@ This redesign fixes those gaps by adding context, comparison, and qualitative in
 
 **The Problem:** Without benchmarks, people don't know what to aim for. Is 65% good enough? What do top performers do differently?
 
-**The Solution:** We explicitly define excellence thresholds:
+**The Solution:** We provide context through the diffusion curve and segment descriptions:
 
-- **Good:** 50%+ (solid AI-Enabled practices)
-- **Excellent:** 65%+ (AI-Driven level)
-- **World-class:** 85%+ (AI-Native, top 10%)
+- **Innovators (85-100%):** Top 10%, pioneering new AI practices
+- **Early Adopters (65-84%):** Top 25%, leading AI adoption
+- **Early Majority (35-64%):** Middle 50%, systematically building
+- **Late Majority (15-34%):** Bottom 35%, cautious adoption
+- **Laggards (0-14%):** Bottom 15%, just beginning
 
-We also explain what teams at each level actually do — not just abstract descriptions, but concrete practices.
+Each segment includes a description of what teams at that level typically do — not just abstract labels, but clear market positioning.
 
 **Why This Matters:** Teams now have clear targets and can understand the distance between where they are and where they want to be.
+
+**Design Decisions:**
+- **No separate "threshold" explanations** — Context is built into the segment descriptions and benchmark card
+- **Focus on relative position** — "Where you are vs. the market" rather than arbitrary cutoffs
 
 ---
 
@@ -106,11 +117,12 @@ Even the worst scores are presented as "areas needing attention" with clear expl
 
 **The Solution:** We structure results in priority order:
 
-1. **First:** Market position (context)
-2. **Second:** Strengths and constraints (what matters most)
-3. **Third:** Overall level description
-4. **Fourth:** Detailed category breakdown
-5. **Last:** Patterns and inconsistencies (for deeper analysis)
+1. **First:** Circular score diagram (immediate visual feedback)
+2. **Second:** Overall level description (what this means for your team)
+3. **Third:** Market position with diffusion curve (comparative context)
+4. **Fourth:** Team profile with strengths and constraints (qualitative insights)
+5. **Fifth:** Detailed category breakdown (deep dive)
+6. **Last:** Patterns and inconsistencies (for deeper analysis)
 
 The most important insights come first. People who want to dig deeper can scroll down.
 
@@ -148,27 +160,120 @@ The most important insights come first. People who want to dig deeper can scroll
 
 ---
 
-## Implementation Priorities
+## Current Results Page Structure
 
-### What We Built First (High Priority):
+The results page now follows this layout:
 
-1. **Diffusion curve visualization** — Gives instant context
-   - Answers: "Is this good or bad?"
-   - Visual, immediate, memorable
+### 1. Score Circle (Top)
+- Large circular diagram showing percentage score
+- Maturity level label (AI-Curious, AI-Enabled, AI-Driven, AI-Native)
+- Animated progress ring
+- Immediate visual feedback
 
-2. **Strengths and constraints** — Tells the story
-   - Answers: "What's working and what isn't?"
-   - Qualitative, specific, actionable
+### 2. About Your Current Level
+- **Position:** Right under the score circle (most prominent)
+- Full paragraph describing the team's maturity level
+- Constructive, respectful tone
+- Sets context for everything below
 
-3. **Benchmarks** — Defines excellence
-   - Answers: "What do top teams do?"
-   - Aspirational, concrete, motivating
+### 3. Your Position in the Market
+- **Diffusion curve visualization** with 5 segments
+- Active segment highlighted (no extra markers)
+- **Benchmark card** below showing:
+  - Segment name and market position badge
+  - Short description of the segment
+  - Your score and maturity level
+  - "What this means" — contextualized message
 
-### What Can Come Later (Medium Priority):
+### 4. Your Team Profile
+- **Overall pattern** identified (e.g., "High energy + Low structure")
+- **Strengths section:** Top 3 categories scoring >= 3.0
+  - Interpretation: What the high score means
+  - Impact: Why it's beneficial
+- **Constraints section:** Bottom 3 categories scoring < 3.5
+  - Interpretation: What the low score means
+  - Impact: How it affects the team
+  - Cost: What you're losing
 
-4. Champion reference section (what do top 15% do differently)
-5. Distance to next level (concrete roadmap)
-6. Category deep-dive (question-level analysis)
+### 5. Category Breakdown
+- All 9 categories with bar charts
+- Scores displayed as X.X/5.0
+- Color-coded (low/medium/high)
+- Animated bars on load
+
+### 6. Key Patterns Detected (conditional)
+- Shows only if cross-category patterns exist
+- Examples: "High tools, low data", "High skills, low strategy"
+- Risk level indicated (high/medium)
+
+### 7. Areas with High Variance (conditional)
+- Shows only if categories have inconsistent responses
+- Indicates uneven practices within the team
+
+### 8. Recommended Next Step
+- Product recommendation based on scoring logic
+- Description, why it helps, what will change
+- Tied to specific gaps, not just overall score
+
+---
+
+## What We Built (Current Implementation)
+
+### Core Features (Implemented):
+
+1. ✅ **Circular score visualization** — Immediate visual feedback
+   - Animated progress ring
+   - Percentage and level display
+   - Clean, professional design
+
+2. ✅ **Level description at top** — Context first
+   - Positioned prominently under score
+   - Full paragraph explanation
+   - Constructive framing
+
+3. ✅ **Diffusion curve visualization** — Market positioning
+   - 5 segments with percentages
+   - Active segment highlighting (no decorative markers)
+   - Clean, focused design
+
+4. ✅ **Benchmark context card** — Comparative insight
+   - Segment description
+   - "What this means" for each score range
+   - Market position badge
+
+5. ✅ **Team profile with patterns** — Qualitative analysis
+   - Overall pattern detection (5 variants)
+   - Strengths: interpretation + impact
+   - Constraints: interpretation + impact + cost
+   - Category-specific, contextual
+
+6. ✅ **Category breakdown** — Detailed scores
+   - All 9 categories visualized
+   - Bar charts with animation
+   - Color-coded severity
+
+7. ✅ **Cross-pattern detection** — System-level insights
+   - 4 key patterns (tools/data, skills/strategy, etc.)
+   - Risk levels indicated
+   - Shows only when relevant
+
+8. ✅ **Variance detection** — Quality signals
+   - Identifies inconsistent categories
+   - Explains what variance means
+   - Shows only when variance > 1.5
+
+9. ✅ **Product recommendations** — Next steps
+   - 3 training options
+   - Logic-based (alignment, engineering depth, workflow signals)
+   - Contextual explanations
+
+### Future Enhancements (Not Yet Built):
+
+- Champion reference section (detailed practices of top 15%)
+- Distance to next level calculator (specific roadmap)
+- Question-level deep dive (per-category detail)
+- Downloadable PDF report
+- Comparison over time (if retaken)
 
 ---
 
