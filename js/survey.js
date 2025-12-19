@@ -239,11 +239,19 @@ class ResultsUI {
     this.patternsContainerEl = document.getElementById('patterns-container');
     this.inconsistencySectionEl = document.getElementById('inconsistency-section');
     this.inconsistencyContainerEl = document.getElementById('inconsistency-container');
+    // NEW: Benchmark and profile elements
+    this.diffusionCurveEl = document.getElementById('diffusion-curve');
+    this.benchmarkContextEl = document.getElementById('benchmark-context');
+    this.overallPatternEl = document.getElementById('overall-pattern');
+    this.strengthsContainerEl = document.getElementById('strengths-container');
+    this.constraintsContainerEl = document.getElementById('constraints-container');
   }
 
   // Render all results
   render() {
     this.renderScoreCircle();
+    this.renderBenchmark();
+    this.renderTeamProfile();
     this.renderLevelDescription();
     this.renderCategoryChart();
     this.renderPatterns();
@@ -267,6 +275,131 @@ class ResultsUI {
       this.scoreCircleEl.style.strokeDashoffset = offset;
       this.scoreCircleEl.style.transition = 'stroke-dashoffset 1.5s ease';
     }, 100);
+  }
+
+  // Render benchmark and diffusion curve
+  renderBenchmark() {
+    const segment = this.results.diffusionSegment;
+    const percentage = this.results.aiNativenessPercentage;
+    
+    // Create diffusion curve visualization
+    this.diffusionCurveEl.innerHTML = `
+      <div class="diffusion-visual">
+        <div class="curve-segments">
+          <div class="segment innovators ${segment.segment === 'Innovators' ? 'active' : ''}">
+            <div class="segment-bar"></div>
+            <div class="segment-label">Innovators<br><span class="segment-percent">2.5%</span></div>
+          </div>
+          <div class="segment early-adopters ${segment.segment === 'Early Adopters' ? 'active' : ''}">
+            <div class="segment-bar"></div>
+            <div class="segment-label">Early Adopters<br><span class="segment-percent">13.5%</span></div>
+          </div>
+          <div class="segment early-majority ${segment.segment === 'Early Majority' ? 'active' : ''}">
+            <div class="segment-bar"></div>
+            <div class="segment-label">Early Majority<br><span class="segment-percent">34%</span></div>
+          </div>
+          <div class="segment late-majority ${segment.segment === 'Late Majority' ? 'active' : ''}">
+            <div class="segment-bar"></div>
+            <div class="segment-label">Late Majority<br><span class="segment-percent">34%</span></div>
+          </div>
+          <div class="segment laggards ${segment.segment === 'Laggards' ? 'active' : ''}">
+            <div class="segment-bar"></div>
+            <div class="segment-label">Laggards<br><span class="segment-percent">16%</span></div>
+          </div>
+        </div>
+      </div>
+    `;
+    
+    // Create context explanation
+    this.benchmarkContextEl.innerHTML = `
+      <div class="benchmark-card">
+        <div class="benchmark-header">
+          <h4>${segment.segment}</h4>
+          <span class="benchmark-badge">${segment.marketPosition}</span>
+        </div>
+        <p class="benchmark-description">${segment.description}</p>
+        <div class="benchmark-details">
+          <div class="detail-item">
+            <strong>Your Score:</strong> ${percentage}% (${this.results.maturityLevel})
+          </div>
+          <div class="detail-item">
+            <strong>What this means:</strong> ${this.getBenchmarkMeaning(percentage)}
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  // Get benchmark meaning based on percentage
+  getBenchmarkMeaning(percentage) {
+    if (percentage < 15) {
+      return "You're at the beginning of your AI journey. Focus on building awareness and foundational skills.";
+    } else if (percentage < 35) {
+      return "You're building AI capabilities carefully. The opportunity is to move from isolated experiments to systematic practices.";
+    } else if (percentage < 65) {
+      return "You're ahead of half of software teams. You've moved past early experimentation into structured adoption.";
+    } else if (percentage < 85) {
+      return "You're in the top 25% of teams. You're leading AI adoption in your industry with systematic practices.";
+    } else {
+      return "You're in the top 10% of teams. You're pioneering new AI practices and setting standards for others.";
+    }
+  }
+
+  // Render team profile (strengths and constraints)
+  renderTeamProfile() {
+    const pattern = this.results.overallPattern;
+    const strengths = this.results.strengths;
+    const constraints = this.results.constraints;
+    
+    // Render overall pattern
+    this.overallPatternEl.innerHTML = `
+      <div class="pattern-summary">
+        <strong>The pattern we're seeing:</strong> ${pattern.title}
+      </div>
+      <p>${pattern.description}</p>
+    `;
+    
+    // Render strengths
+    this.strengthsContainerEl.innerHTML = '';
+    if (strengths.length === 0) {
+      this.strengthsContainerEl.innerHTML = '<p class="empty-state">Building your strengths as you develop AI capabilities.</p>';
+    } else {
+      strengths.forEach(strength => {
+        const strengthCard = document.createElement('div');
+        strengthCard.className = 'insight-card strength-card';
+        strengthCard.innerHTML = `
+          <div class="insight-header">
+            <h4>${strength.name}</h4>
+            <span class="insight-score">${formatScore(strength.score)}/5</span>
+          </div>
+          <p class="insight-interpretation">→ ${strength.interpretation}</p>
+          <p class="insight-impact"><strong>Impact:</strong> ${strength.impact}</p>
+        `;
+        this.strengthsContainerEl.appendChild(strengthCard);
+      });
+    }
+    
+    // Render constraints
+    this.constraintsContainerEl.innerHTML = '';
+    if (constraints.length === 0) {
+      this.constraintsContainerEl.innerHTML = '<p class="empty-state">No critical constraints detected. Keep building on your strengths.</p>';
+    } else {
+      constraints.forEach(constraint => {
+        const constraintCard = document.createElement('div');
+        constraintCard.className = 'insight-card constraint-card';
+        const severity = constraint.score < 2.0 ? 'critical' : constraint.score < 3.0 ? 'warning' : 'moderate';
+        constraintCard.innerHTML = `
+          <div class="insight-header ${severity}">
+            <h4>${constraint.name}</h4>
+            <span class="insight-score">${formatScore(constraint.score)}/5</span>
+          </div>
+          <p class="insight-interpretation">→ ${constraint.interpretation}</p>
+          <p class="insight-impact"><strong>Impact:</strong> ${constraint.impact}</p>
+          <p class="insight-cost"><strong>What this costs:</strong> ${constraint.cost}</p>
+        `;
+        this.constraintsContainerEl.appendChild(constraintCard);
+      });
+    }
   }
 
   // Render level description

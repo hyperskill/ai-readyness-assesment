@@ -4,109 +4,109 @@ const SURVEY_DATA = {
     {
       id: 'strategy-culture',
       name: 'Strategy & Culture',
-      description: 'How clear and aligned is your team on why, where, and how AI should be used.',
+      description: 'How intentionally AI is positioned, communicated, and supported for the team.',
       questions: [
-        'We can clearly explain why AI matters for our team next year.',
-        'We understand which roles AI will support and which may change.',
-        'Using AI is seen as normal work practice, not as cheating.',
-        'We have agreed where AI use is expected, not optional.',
-        'Failed AI experiments do not lead to blame or punishment.'
+        'Leadership regularly communicates to my team why AI matters for the business and for specific roles over the next 12 months.',
+        'Leadership and managers have discussed and aligned with the team on which roles AI supports and which roles may change because of AI.',
+        'Employees in my team generally feel safe using AI in their daily work without fear of judgment or negative consequences.',
+        'Leadership has communicated where and how AI is expected to be used in everyday work, and my team refers to this guidance in practice.',
+        'Failed or imperfect AI experiments in the team are usually discussed with a focus on learning rather than blame.'
       ]
     },
     {
       id: 'data-infrastructure',
-      name: 'Data & Infrastructure',
-      description: 'Whether your data and systems are ready to support AI usage reliably and securely.',
+      name: 'Data, Infrastructure & Governance',
+      description: 'How well data, systems, and rules enable the team to use AI responsibly.',
       questions: [
-        'We know which data is needed for our AI use cases.',
-        'Our data is clean and up to date enough for AI use.',
-        'We clearly know which data must not be shared with AI tools.',
-        'We can connect AI tools to our data without manual copy-paste.',
-        'We understand current infrastructure limits and work within them.'
+        'My team works with clearly identified data sources that are used in our AI use cases.',
+        'The data used by the team for AI is generally clean, up to date, and usable without excessive manual effort.',
+        'There are clear rules about which data must not be shared with AI tools, and my team mostly follows them in practice.',
+        'AI tools used by the team are connected to data sources through integrations or APIs in most cases, rather than manual copy-paste.',
+        'Known infrastructure limitations are explicitly considered when my team decides how and where to use AI.'
       ]
     },
     {
       id: 'tools-automation',
       name: 'Tools & Automation',
-      description: 'How well AI tools are integrated into daily workflows and where they add real value.',
+      description: 'How consistently AI tools are embedded into the team\'s daily workflows.',
       questions: [
-        'AI tools are part of our daily workflow.',
-        'We know when AI helps and when it can mislead us.',
-        'We clearly distinguish between AI assistants and autonomous agents.',
-        'We have tasks where AI already saves significant time.',
-        'We regularly review and update our AI tool stack.'
+        'AI tools are used regularly as part of my team\'s daily work, not only for one-off experiments.',
+        'Team members actively review AI outputs and know when human judgment is required.',
+        'My team consciously chooses between AI assistants and more autonomous agents depending on task complexity and risk.',
+        'There are recurring tasks where AI saves the team noticeable time on a regular basis.',
+        'The team periodically reassesses its AI tool stack and adjusts it as needs and constraints change.'
       ]
     },
     {
       id: 'skills-learning',
       name: 'Skills & Learning',
-      description: 'Whether your team has the skills needed to use AI effectively and knows where gaps exist.',
+      description: 'How systematically AI skills are developed and supported within the team.',
       questions: [
-        'We know which AI skills are needed for each role in the team.',
-        'Some team members can clearly and precisely give tasks to AI.',
-        'New hires are introduced to our AI practices during onboarding.',
-        'We know the difference between using AI and checking its output.',
-        'We clearly see which AI skills we are missing today.'
+        'Required AI skills are defined for different roles in my team, at least at a high level.',
+        'Some team members consistently create clear and effective instructions or prompts for AI tools.',
+        'New team members are introduced to existing AI practices during onboarding, even if only at a basic level.',
+        'AI outputs produced by the team are usually reviewed and validated rather than accepted without checks.',
+        'The team has a shared understanding of which AI-related skills are currently missing or underdeveloped.'
       ]
     },
     {
       id: 'product-processes',
       name: 'Product & Processes',
-      description: 'How AI impacts product quality, user experience, and core business processes.',
+      description: 'How AI contributes to value creation in the team\'s work.',
       questions: [
-        'We can point to where AI creates real value in our product or service.',
-        'AI improves not only speed but also quality or user experience.',
-        'We know which processes require a human in the loop.',
-        'AI-driven process changes are documented and explained.',
-        'We consciously balance speed and reliability when using AI.'
+        'My team can point to specific parts of the product or service where AI creates tangible value.',
+        'AI improves not only speed, but also quality or user experience in some of the team\'s core processes.',
+        'Processes that require a human-in-the-loop are defined and generally followed by the team.',
+        'Changes to workflows caused by AI adoption are documented or explained well enough for the team to follow.',
+        'When using AI, the team consciously balances speed, quality, and reliability rather than optimizing for speed alone.'
       ]
     },
     {
       id: 'security-compliance',
       name: 'Security & Compliance',
-      description: 'Whether risks are understood, rules are clear, and responsibility is defined.',
+      description: 'How risks, responsibility, and safeguards are handled in the team\'s usage.',
       questions: [
-        'The team understands risks of uncontrolled AI usage.',
-        'We have clear rules on what data can and cannot be used with AI.',
-        'Responsibility for AI mistakes is clearly defined.',
-        'Our AI usage does not violate client or regulatory requirements.',
-        'We know how to quickly stop or roll back harmful AI solutions.'
+        'Team members are generally aware of risks related to uncontrolled or careless AI usage.',
+        'Rules for safe and compliant AI use exist and are applied by the team in most everyday situations.',
+        'Responsibility for decisions and mistakes involving AI is clearly assigned to people, not to tools.',
+        'The team\'s AI usage aligns with client expectations, legal requirements, and regulatory constraints.',
+        'There is a known process the team can follow to pause, limit, or roll back AI solutions if issues arise.'
       ]
     },
     {
       id: 'experimentation-innovation',
       name: 'Experimentation & Innovation',
-      description: 'How deliberately your team runs AI experiments and learns from them.',
+      description: 'How structured and intentional AI experimentation is within the team.',
       questions: [
-        'We define AI experiments with clear expected outcomes.',
-        'Experiments have time limits and success criteria.',
-        'Failed experiments still produce useful learning.',
-        'The team has dedicated time for AI experimentation.',
-        'We know which experiments to scale and which to stop.'
+        'AI experiments run by the team are usually framed as hypotheses with a clear expected outcome.',
+        'Most AI experiments have a defined timeframe and some criteria for success or failure.',
+        'Failed AI experiments are reviewed by the team and lead to concrete learnings.',
+        'The team has some protected time or space to experiment with AI alongside delivery work.',
+        'The team consciously decides which AI experiments to scale further and which to stop.'
       ]
     },
     {
       id: 'integration-scaling',
       name: 'Integration & Scaling',
-      description: 'Whether AI solutions can be reused, maintained, and scaled beyond prototypes.',
+      description: 'How reliably the team\'s AI solutions can be sustained and expanded.',
       questions: [
-        'AI solutions do not depend on a single key person.',
-        'We can reuse AI solutions across teams with little effort.',
-        'AI solutions are maintained after launch.',
-        'We understand what currently blocks AI scaling.',
-        'AI initiatives fit into our overall system architecture.'
+        'AI solutions used by the team do not depend on a single individual to operate or evolve.',
+        'Successful AI solutions from the team can be reused or adapted by other teams with reasonable effort.',
+        'AI solutions are maintained by the team after launch, not only during initial rollout.',
+        'The team has a reasonable understanding of what currently limits further AI scaling.',
+        'AI initiatives fit into the broader system and architecture the team works within, rather than existing as isolated add-ons.'
       ]
     },
     {
       id: 'impact-measurement',
       name: 'Impact Measurement',
-      description: 'How rigorously you measure AI results and make data-driven decisions about investments.',
+      description: 'How clearly the team measures and prioritizes AI impact.',
       questions: [
-        'We define success metrics before starting AI initiatives.',
-        'We can show which improvements came specifically from AI.',
-        'We distinguish team-level gains from business-level impact.',
-        'AI initiatives compete for resources like any other project.',
-        'We are ready to stop AI projects that do not deliver value.'
+        'Success metrics are defined for AI initiatives before or shortly after the team starts them.',
+        'The team can point to concrete improvements that are largely attributable to AI usage.',
+        'The team distinguishes between local efficiency gains and broader business impact.',
+        'AI initiatives involving the team are prioritized and resourced alongside other projects based on expected value.',
+        'Leadership is willing to stop AI initiatives involving the team if they do not deliver meaningful results over time.'
       ]
     }
   ]
