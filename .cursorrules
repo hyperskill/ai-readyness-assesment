@@ -97,3 +97,5 @@ Only use external libraries if:
 ## Exceptions
 If a specific feature absolutely requires a library (e.g., complex charts, maps), discuss with the user first before implementing.
 
+
+
