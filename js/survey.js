@@ -285,46 +285,30 @@ class ResultsUI {
     // Create diffusion curve visualization
     this.diffusionCurveEl.innerHTML = `
       <div class="diffusion-visual">
-        <div class="position-marker position-marker-top">
-          <div class="marker-text">You are here</div>
-          <div class="marker-arrow">▲</div>
-        </div>
         <div class="curve-segments">
-          <div class="segment innovators ${segment.segment === 'Innovators' ? 'active' : ''}" data-segment="Innovators">
+          <div class="segment innovators ${segment.segment === 'Innovators' ? 'active' : ''}">
             <div class="segment-bar"></div>
             <div class="segment-label">Innovators<br><span class="segment-percent">2.5%</span></div>
           </div>
-          <div class="segment early-adopters ${segment.segment === 'Early Adopters' ? 'active' : ''}" data-segment="Early Adopters">
+          <div class="segment early-adopters ${segment.segment === 'Early Adopters' ? 'active' : ''}">
             <div class="segment-bar"></div>
             <div class="segment-label">Early Adopters<br><span class="segment-percent">13.5%</span></div>
           </div>
-          <div class="segment early-majority ${segment.segment === 'Early Majority' ? 'active' : ''}" data-segment="Early Majority">
+          <div class="segment early-majority ${segment.segment === 'Early Majority' ? 'active' : ''}">
             <div class="segment-bar"></div>
             <div class="segment-label">Early Majority<br><span class="segment-percent">34%</span></div>
           </div>
-          <div class="segment late-majority ${segment.segment === 'Late Majority' ? 'active' : ''}" data-segment="Late Majority">
+          <div class="segment late-majority ${segment.segment === 'Late Majority' ? 'active' : ''}">
             <div class="segment-bar"></div>
             <div class="segment-label">Late Majority<br><span class="segment-percent">34%</span></div>
           </div>
-          <div class="segment laggards ${segment.segment === 'Laggards' ? 'active' : ''}" data-segment="Laggards">
+          <div class="segment laggards ${segment.segment === 'Laggards' ? 'active' : ''}">
             <div class="segment-bar"></div>
             <div class="segment-label">Laggards<br><span class="segment-percent">16%</span></div>
           </div>
         </div>
       </div>
     `;
-    
-    // Add click handlers to segments
-    setTimeout(() => {
-      const segments = this.diffusionCurveEl.querySelectorAll('.segment');
-      segments.forEach(seg => {
-        seg.style.cursor = 'pointer';
-        seg.addEventListener('click', () => {
-          const segmentName = seg.getAttribute('data-segment');
-          this.showSegmentInfo(segmentName);
-        });
-      });
-    }, 100);
     
     // Create context explanation
     this.benchmarkContextEl.innerHTML = `
@@ -334,7 +318,6 @@ class ResultsUI {
           <span class="benchmark-badge">${segment.marketPosition}</span>
         </div>
         <p class="benchmark-description">${segment.description}</p>
-        <p class="benchmark-hint"><em>💡 Tip: Click on any segment above to learn more about that category</em></p>
         <div class="benchmark-details">
           <div class="detail-item">
             <strong>Your Score:</strong> ${percentage}% (${this.results.maturityLevel})
@@ -342,85 +325,9 @@ class ResultsUI {
           <div class="detail-item">
             <strong>What this means:</strong> ${this.getBenchmarkMeaning(percentage)}
           </div>
-          <div class="detail-item">
-            <strong>Excellence threshold:</strong> 65%+ (AI-Driven level)
-            <span class="threshold-explanation">A <strong>threshold</strong> is the minimum score needed to reach a higher maturity level. Teams scoring 65% or above are considered excellent, demonstrating AI-Driven practices with measurable business impact.</span>
-          </div>
         </div>
       </div>
     `;
-  }
-
-  // Show segment information
-  showSegmentInfo(segmentName) {
-    const segmentInfo = this.getSegmentDetails(segmentName);
-    const infoEl = document.getElementById('segment-info');
-    const titleEl = document.getElementById('segment-info-title');
-    const descriptionEl = document.getElementById('segment-info-description');
-    const detailsEl = document.getElementById('segment-info-details');
-    
-    titleEl.textContent = segmentName;
-    descriptionEl.textContent = segmentInfo.description;
-    detailsEl.innerHTML = `
-      <div class="segment-detail-item">
-        <strong>Market Share:</strong> ${segmentInfo.percentage}
-      </div>
-      <div class="segment-detail-item">
-        <strong>Score Range:</strong> ${segmentInfo.scoreRange}
-      </div>
-      <div class="segment-detail-item">
-        <strong>Characteristics:</strong> ${segmentInfo.characteristics}
-      </div>
-      <div class="segment-detail-item">
-        <strong>Typical Practices:</strong> ${segmentInfo.practices}
-      </div>
-    `;
-    
-    infoEl.style.display = 'block';
-    infoEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-  }
-
-  // Get detailed information about a segment
-  getSegmentDetails(segmentName) {
-    const segments = {
-      'Innovators': {
-        percentage: '2.5% of teams',
-        scoreRange: '85-100% (AI-Native)',
-        description: 'Pioneering teams that create new AI practices and set industry standards.',
-        characteristics: 'Risk-tolerant, experimental, thought leaders who develop novel approaches to AI integration.',
-        practices: 'Custom AI platforms, advanced MLOps, AI governance frameworks, research partnerships, and active contribution to AI community standards.'
-      },
-      'Early Adopters': {
-        percentage: '13.5% of teams',
-        scoreRange: '65-84% (AI-Driven)',
-        description: 'Leading teams that adopt proven AI practices early and influence others.',
-        characteristics: 'Visionary and strategic, they validate innovations and make them practical for broader adoption.',
-        practices: 'Production AI systems, systematic evaluation, clear AI strategy, cross-functional AI teams, and documented best practices.'
-      },
-      'Early Majority': {
-        percentage: '34% of teams',
-        scoreRange: '35-64% (AI-Enabled)',
-        description: 'Pragmatic teams building AI capabilities systematically with proven approaches.',
-        characteristics: 'Deliberate adopters who wait for proven practices before investing, focusing on practical value.',
-        practices: 'AI pilots in production, team training programs, tool standardization, emerging governance, and basic impact measurement.'
-      },
-      'Late Majority': {
-        percentage: '34% of teams',
-        scoreRange: '15-34% (AI-Curious to AI-Enabled)',
-        description: 'Cautious teams adopting AI after it becomes established and necessary.',
-        characteristics: 'Risk-averse and resource-conscious, they adopt when external pressure or clear ROI exists.',
-        practices: 'Individual experimentation, ad-hoc tool usage, limited coordination, informal learning, and reactive adoption.'
-      },
-      'Laggards': {
-        percentage: '16% of teams',
-        scoreRange: '0-14% (AI-Curious)',
-        description: 'Teams just beginning to explore AI, often due to constraints or resistance to change.',
-        characteristics: 'Traditional focus, skeptical of new technology, or limited resources for innovation.',
-        practices: 'Awareness building, exploring possibilities, understanding basic concepts, and evaluating whether AI fits their context.'
-      }
-    };
-    
-    return segments[segmentName] || segments['Early Majority'];
   }
 
   // Get benchmark meaning based on percentage
