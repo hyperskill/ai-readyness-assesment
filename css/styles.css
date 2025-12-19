@@ -1083,6 +1083,8 @@ h3 {
 .diffusion-visual {
   position: relative;
   margin-bottom: var(--spacing-md);
+  display: flex;
+  flex-direction: column;
 }
 
 .curve-segments {
@@ -1166,9 +1168,16 @@ h3 {
   animation: bounce 2s ease-in-out infinite;
 }
 
+.position-marker-top {
+  margin-top: 0;
+  margin-bottom: var(--spacing-xs);
+  order: -1;
+}
+
 .marker-arrow {
   font-size: 1.5rem;
   color: var(--accent-cyan);
+  text-shadow: 0 0 10px rgba(0, 217, 255, 0.5);
 }
 
 .marker-text {
@@ -1176,6 +1185,7 @@ h3 {
   color: var(--accent-cyan);
   font-weight: 600;
   margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
 }
 
 @keyframes bounce {
@@ -1183,8 +1193,22 @@ h3 {
     transform: translateY(0);
   }
   50% {
-    transform: translateY(-5px);
+    transform: translateY(5px);
   }
+}
+
+.segment {
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.segment:hover {
+  opacity: 1;
+  transform: translateY(-3px);
+}
+
+.segment:hover .segment-bar {
+  box-shadow: 0 4px 15px rgba(0, 217, 255, 0.3);
 }
 
 .benchmark-context {
@@ -1245,6 +1269,81 @@ h3 {
 .detail-item strong {
   color: var(--text-primary);
   min-width: 140px;
+}
+
+.threshold-explanation {
+  display: block;
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-style: italic;
+  line-height: 1.5;
+  padding: 0.75rem;
+  background: var(--bg-card);
+  border-radius: var(--border-radius);
+  border-left: 3px solid var(--accent-cyan);
+}
+
+.benchmark-hint {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin: var(--spacing-sm) 0;
+  padding: var(--spacing-sm);
+  background: var(--bg-dark);
+  border-radius: var(--border-radius);
+  text-align: center;
+}
+
+.segment-info {
+  margin-top: var(--spacing-lg);
+  padding: var(--spacing-lg);
+  background: var(--bg-input);
+  border: 2px solid var(--accent-cyan);
+  border-radius: var(--border-radius);
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.segment-info h4 {
+  color: var(--accent-cyan);
+  font-size: 1.25rem;
+  margin-bottom: var(--spacing-sm);
+}
+
+.segment-info p {
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: var(--spacing-md);
+}
+
+.segment-detail-item {
+  margin-bottom: var(--spacing-sm);
+  padding: var(--spacing-sm);
+  background: var(--bg-card);
+  border-radius: var(--border-radius);
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.segment-detail-item strong {
+  color: var(--text-primary);
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.segment-detail-item:last-child {
+  margin-bottom: 0;
 }
 
 /* NEW: Team Profile Section Styles */
@@ -1428,5 +1527,18 @@ h3 {
     flex-direction: column;
     align-items: flex-start;
     gap: 0.25rem;
+  }
+
+  .threshold-explanation {
+    font-size: 0.8rem;
+    padding: 0.5rem;
+  }
+
+  .segment-info {
+    padding: var(--spacing-md);
+  }
+
+  .segment-detail-item {
+    font-size: 0.85rem;
   }
 }
