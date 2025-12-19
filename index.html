@@ -151,9 +151,44 @@
       </div>
       
       <div class="results-content">
-        <div class="level-description">
+        <!-- Level Description - MOVED UNDER CIRCULAR DIAGRAM -->
+        <div class="level-description level-description-top">
           <h2>About Your Current Level</h2>
           <p id="level-description-text"></p>
+        </div>
+
+        <!-- NEW: Benchmark Section -->
+        <div class="benchmark-section">
+          <h2>Your Position in the Market</h2>
+          <div id="diffusion-curve" class="diffusion-curve">
+            <!-- Diffusion curve visualization will be inserted here -->
+          </div>
+          <div id="benchmark-context" class="benchmark-context">
+            <!-- Context about position will be inserted here -->
+          </div>
+        </div>
+
+        <!-- NEW: Team Profile Section -->
+        <div class="team-profile-section">
+          <h2>Your Team Profile</h2>
+          
+          <div id="overall-pattern" class="overall-pattern">
+            <!-- Overall pattern will be inserted here -->
+          </div>
+
+          <div class="strengths-section">
+            <h3>💚 Strengths (What's Working Well)</h3>
+            <div id="strengths-container" class="insights-container">
+              <!-- Strengths will be dynamically inserted here -->
+            </div>
+          </div>
+          
+          <div class="constraints-section">
+            <h3>🔴 Constraints (What's Holding You Back)</h3>
+            <div id="constraints-container" class="insights-container">
+              <!-- Constraints will be dynamically inserted here -->
+            </div>
+          </div>
         </div>
         
         <div class="category-breakdown">
@@ -183,6 +218,30 @@
           <div class="recommendation-card">
             <h3 id="recommended-product" class="product-name"></h3>
             <div id="recommendation-text" class="recommendation-text"></div>
+          </div>
+        </div>
+        
+        <!-- Call to Action Block -->
+        <div class="cta-results-block">
+          <div class="cta-results-content">
+            <div class="cta-results-icon">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <polyline points="7 10 12 15 17 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <line x1="12" y1="15" x2="12" y2="3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="cta-results-text">
+              <h3>Ready to take the next step?</h3>
+              <p>Let's discuss how we can help your team accelerate AI adoption with practical training and workshops.</p>
+            </div>
+            <a href="https://savvycal.com/hyperskill-bootcamps/demo-with-hyperskill" target="_blank" rel="noopener noreferrer" class="cta-results-button">
+              <span>Book a Call</span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <line x1="5" y1="12" x2="19" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <polyline points="12 5 19 12 12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
           </div>
         </div>
         
