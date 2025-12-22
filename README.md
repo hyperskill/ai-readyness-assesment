@@ -106,7 +106,7 @@ ai-readiness/
 - Safari (last 2 versions)
 - Edge (last 2 versions)
 
-## API
+## API & Database
 
 The server provides an API endpoint for assessment submissions:
 
@@ -114,9 +114,22 @@ The server provides an API endpoint for assessment submissions:
 
 See [API.md](API.md) for detailed documentation.
 
-### What Gets Logged
+### Database Integration (Optional)
 
-When a user completes an assessment, the following data is logged to the server console:
+The application supports **Supabase** for storing assessment data:
+- **Submissions table**: Stores email and raw responses
+- **Results table**: Stores calculated scores and recommendations
+- **Linked by ID**: Each submission references its result
+
+See [SUPABASE_SETUP.md](SUPABASE_SETUP.md) for setup instructions.
+
+### What Gets Logged/Saved
+
+When a user completes an assessment:
+1. **Console**: All data is logged to server console
+2. **Database** (if configured): Data is saved to Supabase tables
+
+Data includes:
 - User email (if provided)
 - All question responses by category
 - Overall AI Nativeness Index score
@@ -124,17 +137,23 @@ When a user completes an assessment, the following data is logged to the server 
 - Category scores
 - Product recommendations
 
-This allows you to track assessments and analyze results.
-
 ## Environment Variables
 
 The server uses the following environment variables:
 - `PORT` - Server port (default: 3000)
+- `SUPABASE_URL` - Supabase project URL (optional)
+- `SUPABASE_SERVICE_KEY` - Supabase service role key (optional)
 
-Create a `.env` file in the root directory if you need to customize:
+Create a `.env` file in the root directory:
+```env
+PORT=3000
+
+# Optional: Supabase configuration for database storage
+SUPABASE_URL=https://your-project.supabase.co
+SUPABASE_SERVICE_KEY=your-service-role-key
 ```
-PORT=8080
-```
+
+**Note:** If Supabase is not configured, the application will work normally but only log data to console (no database storage).
 
 ## Contributing
 

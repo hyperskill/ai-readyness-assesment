@@ -1,6 +1,8 @@
+import 'dotenv/config';
 import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { saveAssessment, isSupabaseConfigured } from './supabase.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -12,7 +14,7 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 
 // API route for assessment submission
-app.post('/api/submit-assessment', (req, res) => {
+app.post('/api/submit-assessment', async (req, res) => {
   try {
     const { email, responses, results } = req.body;
     
@@ -79,10 +81,39 @@ app.post('/api/submit-assessment', (req, res) => {
     
     console.log('================================================\n');
     
+    // Save to Supabase if configured
+    let dbResult = null;
+    if (isSupabaseConfigured()) {
+      try {
+        // Debug: log what we're about to save
+        console.log('\n--- SAVING TO DATABASE ---');
+        console.log('overallScore:', results.overallScore, '(type:', typeof results.overallScore, ')');
+        console.log('maturityLevel:', results.maturityLevel);
+        console.log('categoryScores keys:', Object.keys(results.categoryScores || {}));
+        console.log('recommendations:', results.recommendations);
+        console.log('maturityDescription:', results.maturityDescription ? `${results.maturityDescription.substring(0, 50)}...` : 'not provided');
+        console.log('recommendationsText:', results.recommendationsText ? `${results.recommendationsText.substring(0, 50)}...` : 'not provided');
+        
+        dbResult = await saveAssessment(email, responses, results, {
+          userAgent: req.get('user-agent'),
+          ipAddress: req.ip
+        });
+        console.log('✓ Data saved to Supabase database');
+      } catch (dbError) {
+        console.error('⚠ Failed to save to Supabase:', dbError.message);
+        // Continue anyway - don't fail the request if DB save fails
+      }
+    }
+    
     // Send success response
     res.json({ 
       success: true, 
-      message: 'Assessment submitted successfully' 
+      message: 'Assessment submitted successfully',
+      savedToDatabase: !!dbResult,
+      ...(dbResult && { 
+        resultId: dbResult.resultId,
+        submissionId: dbResult.submissionId 
+      })
     });
     
   } catch (error) {

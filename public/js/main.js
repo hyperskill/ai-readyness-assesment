@@ -204,6 +204,24 @@ async function showResults(resultsSection) {
 // Submit assessment data to server
 async function submitAssessmentToServer(email, responses, results) {
   try {
+    // Transform categoryScores from objects to simple score values
+    const categoryScoresSimple = {};
+    Object.entries(results.categoryScores).forEach(([categoryId, categoryData]) => {
+      categoryScoresSimple[categoryId] = categoryData.score;
+    });
+    
+    // Get maturity level description
+    const maturityDescription = LEVEL_DESCRIPTIONS[results.maturityLevel] || '';
+    
+    // Get product recommendation details
+    let recommendationsText = '';
+    if (results.recommendation && results.recommendation.product) {
+      const productInfo = PRODUCT_DESCRIPTIONS[results.recommendation.product];
+      if (productInfo) {
+        recommendationsText = `${productInfo.name}\n\n${productInfo.description}\n\nWhy this helps: ${productInfo.why}\n\nWhat will change: ${productInfo.change}`;
+      }
+    }
+    
     const response = await fetch('/api/submit-assessment', {
       method: 'POST',
       headers: {
@@ -213,10 +231,20 @@ async function submitAssessmentToServer(email, responses, results) {
         email: email,
         responses: responses,
         results: {
-          overallScore: results.overallScore,
+          overallScore: results.aiNativenessIndex,
           maturityLevel: results.maturityLevel,
-          categoryScores: results.categoryScores,
-          recommendations: results.recommendations
+          categoryScores: categoryScoresSimple,
+          recommendations: results.recommendation ? [results.recommendation] : [],
+          maturityDescription: maturityDescription,
+          recommendationsText: recommendationsText,
+          // NEW: Add all insights and analysis
+          diffusionSegment: results.diffusionSegment || null,
+          overallPattern: results.overallPattern || null,
+          strengths: results.strengths || [],
+          constraints: results.constraints || [],
+          patterns: results.patterns || [],
+          insights: results.insights || {},
+          inconsistentCategories: results.inconsistentCategories || []
         }
       })
     });
