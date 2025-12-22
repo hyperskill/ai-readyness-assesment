@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" viewBox="0 0 24 24">
+  <path fill="url(#badge-gradient-1)" d="M20.571 21.086a1.2 1.2 0 0 1-1.2 1.2h-1.028a1.2 1.2 0 0 1-1.2-1.2V2.914a1.2 1.2 0 0 1 1.2-1.2h1.028a1.2 1.2 0 0 1 1.2 1.2v18.172Z"></path>
+  <path fill="url(#badge-gradient-2)" d="M13.714 9.086a1.2 1.2 0 0 1-1.2 1.2h-1.028a1.2 1.2 0 0 1-1.2-1.2V4.629a1.2 1.2 0 0 1 1.2-1.2h1.028a1.2 1.2 0 0 1 1.2 1.2v4.457Z"></path>
+  <path fill="url(#badge-gradient-3)" d="M6.857 15.943a1.2 1.2 0 0 1-1.2 1.2H4.63a1.2 1.2 0 0 1-1.2-1.2V8.057a1.2 1.2 0 0 1 1.2-1.2h1.028a1.2 1.2 0 0 1 1.2 1.2v7.886Z"></path>
+  <path fill="url(#badge-gradient-4)" d="M13.714 19.371a1.2 1.2 0 0 1-1.2 1.2h-1.028a1.2 1.2 0 0 1-1.2-1.2v-4.457a1.2 1.2 0 0 1 1.2-1.2h1.028a1.2 1.2 0 0 1 1.2 1.2v4.457Z"></path>
+  <defs>
+    <linearGradient id="badge-gradient-1" x1="19.473" x2="25.575" y1="6.484" y2="12.083" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#564DE2"></stop>
+      <stop offset="1" stop-color="#68AEFF"></stop>
+    </linearGradient>
+    <linearGradient id="badge-gradient-2" x1="10.286" x2="16.159" y1="-.052" y2="4.76" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#6C63FF"></stop>
+      <stop offset="1" stop-color="#7AB7FE"></stop>
+    </linearGradient>
+    <linearGradient id="badge-gradient-3" x1="5.913" x2="-.81" y1="19.012" y2="13.484" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#4BFFDF"></stop>
+      <stop offset="1" stop-color="#7AB7FE"></stop>
+    </linearGradient>
+    <linearGradient id="badge-gradient-4" x1="13.119" x2="6.661" y1="24.533" y2="18.421" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#4BFFDF"></stop>
+      <stop offset="1" stop-color="#4D9FFF"></stop>
+    </linearGradient>
+  </defs>
+</svg>

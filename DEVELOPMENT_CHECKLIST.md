@@ -11,10 +11,19 @@ Use this checklist before committing code or considering a feature complete.
 - [ ] Variable/function names are in English
 
 ### Dependencies
-- [ ] No external JavaScript libraries added
+- [ ] Backend: Only Express.js as dependency
+- [ ] Frontend: No external JavaScript libraries or frameworks
 - [ ] No CSS frameworks used
-- [ ] No build tools required
-- [ ] Project runs by opening HTML files directly in browser
+- [ ] No build tools required for frontend
+- [ ] Server runs with `npm start` or `npm run dev`
+
+### Server Requirements
+- [ ] `server.js` is minimal (static file serving only)
+- [ ] No database connections
+- [ ] No API endpoints (unless explicitly required)
+- [ ] Uses environment variables for configuration
+- [ ] Properly serves static files from `/public` directory
+- [ ] SPA routing handled (fallback to index.html)
 
 ## HTML Checklist
 
@@ -102,10 +111,13 @@ Use this checklist before committing code or considering a feature complete.
 
 ## File Organization
 
-- [ ] Files are in correct directories (css/, js/, assets/)
+- [ ] Server files in root (`server.js`, `package.json`)
+- [ ] All frontend files in `/public` directory
+- [ ] Static assets organized (`/public/css`, `/public/js`, `/public/assets`)
 - [ ] File names are lowercase and kebab-case
 - [ ] Related code is grouped together
 - [ ] No duplicate files
+- [ ] `node_modules` in `.gitignore`
 
 ## Documentation
 
@@ -116,12 +128,15 @@ Use this checklist before committing code or considering a feature complete.
 
 ## Testing
 
+- [ ] Server starts without errors (`npm start`)
+- [ ] All static files are served correctly
 - [ ] All features work as expected
-- [ ] No console errors
+- [ ] No console errors in browser
 - [ ] Forms submit correctly
 - [ ] Links navigate properly
 - [ ] Responsive design works on all breakpoints
 - [ ] Edge cases handled
+- [ ] Works on http://localhost:3000
 
 ## Pre-Commit Final Check
 

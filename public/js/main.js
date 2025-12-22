@@ -182,7 +182,7 @@ function showSection(sectionToShow) {
 }
 
 // Calculate and show results
-function showResults(resultsSection) {
+async function showResults(resultsSection) {
   // Calculate scores
   const scoringEngine = new ScoringEngine(surveyManager.responses);
   const results = scoringEngine.calculate();
@@ -190,12 +190,43 @@ function showResults(resultsSection) {
   // Log results for debugging
   console.log('Assessment Results:', results);
   
+  // Send assessment data to server
+  await submitAssessmentToServer(userEmail, surveyManager.responses, results);
+  
   // Show results section
   showSection(resultsSection);
   
   // Render results
   const resultsUI = new ResultsUI(results);
   resultsUI.render();
+}
+
+// Submit assessment data to server
+async function submitAssessmentToServer(email, responses, results) {
+  try {
+    const response = await fetch('/api/submit-assessment', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email: email,
+        responses: responses,
+        results: {
+          overallScore: results.overallScore,
+          maturityLevel: results.maturityLevel,
+          categoryScores: results.categoryScores,
+          recommendations: results.recommendations
+        }
+      })
+    });
+    
+    const data = await response.json();
+    console.log('Server response:', data);
+  } catch (error) {
+    console.error('Error submitting assessment to server:', error);
+    // Don't block the UI if server submission fails
+  }
 }
 
 // Keyboard navigation

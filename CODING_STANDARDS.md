@@ -2,12 +2,20 @@
 
 This document defines the coding standards for the AI Readiness project.
 
+## Architecture Overview
+
+The project uses a simple client-server architecture:
+- **Server**: Express.js serves static files from `/public` directory
+- **Client**: Vanilla HTML/CSS/JavaScript with all logic running client-side
+- **No API**: Server only serves static assets, no backend API endpoints
+
 ## General Principles
 
 1. **Simplicity over cleverness** - Write clear, understandable code
 2. **Standards over shortcuts** - Use web standards, not hacks
-3. **Zero dependencies** - No external libraries unless critical
+3. **Minimal dependencies** - Backend: Express only. Frontend: Zero dependencies
 4. **English only** - All text, comments, names in English
+5. **Separation of concerns** - Server serves static files, logic runs client-side
 
 ## HTML Standards
 
@@ -188,7 +196,54 @@ body {
 }
 ```
 
-## JavaScript Standards
+## Node.js/Express Standards
+
+### Server Code (server.js)
+
+```javascript
+// ✅ GOOD - Minimal Express server
+import express from 'express';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+// Serve static files
+app.use(express.static(path.join(__dirname, 'public')));
+
+// SPA fallback
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+app.listen(PORT, () => {
+  console.log(`Server running on http://localhost:${PORT}`);
+});
+```
+
+```javascript
+// ❌ BAD - Don't add unnecessary middleware or features
+app.use(bodyParser.json()); // Not needed for static file server
+app.use(cors()); // Not needed unless you have API endpoints
+```
+
+### Package.json
+
+```json
+{
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  }
+}
+```
+
+## JavaScript Standards (Frontend)
 
 ### Variable Declarations
 

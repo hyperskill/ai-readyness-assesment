@@ -1,0 +1,25 @@
+{
+  "name": "ai-readiness",
+  "version": "1.0.0",
+  "description": "AI Readiness Assessment Platform - Interactive web application for assessing team AI nativeness",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "keywords": [
+    "ai",
+    "assessment",
+    "survey",
+    "vanilla-js"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

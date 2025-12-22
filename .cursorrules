@@ -1,10 +1,18 @@
 # AI Readiness Project - Development Rules
 
 ## Core Technology Stack
+
+### Backend
+- **Node.js** (v18+) - Runtime environment
+- **Express.js** - Minimal web server for serving static files ONLY
+- NO database, NO API endpoints (unless explicitly required for new features)
+- Server should remain as simple as possible
+
+### Frontend
 - **HTML5** only (semantic markup)
 - **Pure CSS3** (no preprocessors, no frameworks)
 - **Vanilla JavaScript** (ES6+, no frameworks or libraries)
-- **NO external libraries** unless absolutely critical (e.g., specific data visualization if needed)
+- **NO external frontend libraries** unless absolutely critical
 
 ## Language Requirements
 - **ALL user-facing text MUST be in English only**
@@ -15,11 +23,14 @@
 
 ## File Structure
 - Keep a clean, organized folder structure:
-  - `/index.html` - main entry point
-  - `/css/` - all stylesheets
-  - `/js/` - all JavaScript files
-  - `/assets/` - images, fonts, icons
-  - `/pages/` - additional HTML pages if needed
+  - `/server.js` - Express server (minimal, static file serving only)
+  - `/package.json` - Node.js dependencies
+  - `/public/` - all static frontend files served by Express
+    - `/public/index.html` - main entry point
+    - `/public/css/` - all stylesheets
+    - `/public/js/` - all JavaScript files
+    - `/public/assets/` - images, fonts, icons
+    - `/public/docs/` - documentation files
 
 ## HTML Guidelines
 - Use semantic HTML5 elements (`<header>`, `<nav>`, `<main>`, `<section>`, `<article>`, `<footer>`)
@@ -72,10 +83,24 @@
 - Implement CSP (Content Security Policy) headers when possible
 - NO inline event handlers (use addEventListener)
 
+## Server Guidelines
+- Keep `server.js` minimal - only static file serving
+- Use Express.static middleware for serving `public` directory
+- NO API endpoints unless explicitly required for a feature
+- NO database connections
+- Handle basic routing (SPA fallback to index.html)
+- Use environment variables for configuration (PORT, etc.)
+
+## Running the Application
+- Development: `npm run dev` (with auto-restart)
+- Production: `npm start`
+- Requires: `npm install` first to install dependencies
+
 ## Deployment
-- All assets should be relative paths
-- Ensure project works when opened directly in browser
-- Consider adding a simple `README.md` for setup instructions
+- All frontend assets are in `/public` directory
+- Server serves static files from `/public`
+- Configure PORT via environment variable
+- Ensure `package.json` has correct start script
 
 ## What to AVOID
 - ❌ NO React, Vue, Angular, or any JS frameworks
@@ -96,6 +121,7 @@ Only use external libraries if:
 
 ## Exceptions
 If a specific feature absolutely requires a library (e.g., complex charts, maps), discuss with the user first before implementing.
+
 
 
 
