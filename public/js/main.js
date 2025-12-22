@@ -182,7 +182,7 @@ function showSection(sectionToShow) {
 }
 
 // Calculate and show results
-function showResults(resultsSection) {
+async function showResults(resultsSection) {
   // Calculate scores
   const scoringEngine = new ScoringEngine(surveyManager.responses);
   const results = scoringEngine.calculate();
@@ -190,12 +190,71 @@ function showResults(resultsSection) {
   // Log results for debugging
   console.log('Assessment Results:', results);
   
+  // Send assessment data to server
+  await submitAssessmentToServer(userEmail, surveyManager.responses, results);
+  
   // Show results section
   showSection(resultsSection);
   
   // Render results
   const resultsUI = new ResultsUI(results);
   resultsUI.render();
+}
+
+// Submit assessment data to server
+async function submitAssessmentToServer(email, responses, results) {
+  try {
+    // Transform categoryScores from objects to simple score values
+    const categoryScoresSimple = {};
+    Object.entries(results.categoryScores).forEach(([categoryId, categoryData]) => {
+      categoryScoresSimple[categoryId] = categoryData.score;
+    });
+    
+    // Get maturity level description
+    const maturityDescription = LEVEL_DESCRIPTIONS[results.maturityLevel] || '';
+    
+    // Get product recommendation details
+    let recommendationsText = '';
+    if (results.recommendation && results.recommendation.product) {
+      const productInfo = PRODUCT_DESCRIPTIONS[results.recommendation.product];
+      if (productInfo) {
+        recommendationsText = `${productInfo.name}\n\n${productInfo.description}\n\nWhy this helps: ${productInfo.why}\n\nWhat will change: ${productInfo.change}`;
+      }
+    }
+    
+    const response = await fetch('/api/submit-assessment', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email: email,
+        responses: responses,
+        results: {
+          overallScore: results.aiNativenessIndex,
+          maturityLevel: results.maturityLevel,
+          categoryScores: categoryScoresSimple,
+          recommendations: results.recommendation ? [results.recommendation] : [],
+          maturityDescription: maturityDescription,
+          recommendationsText: recommendationsText,
+          // NEW: Add all insights and analysis
+          diffusionSegment: results.diffusionSegment || null,
+          overallPattern: results.overallPattern || null,
+          strengths: results.strengths || [],
+          constraints: results.constraints || [],
+          patterns: results.patterns || [],
+          insights: results.insights || {},
+          inconsistentCategories: results.inconsistentCategories || []
+        }
+      })
+    });
+    
+    const data = await response.json();
+    console.log('Server response:', data);
+  } catch (error) {
+    console.error('Error submitting assessment to server:', error);
+    // Don't block the UI if server submission fails
+  }
 }
 
 // Keyboard navigation

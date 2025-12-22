@@ -37,25 +37,43 @@ A modern, interactive web application for team leads to assess their team's AI n
 
 ## Technology Stack
 
-**Pure Vanilla Stack (No frameworks or libraries)**
-- HTML5 (semantic markup)
-- CSS3 (custom properties, Grid, Flexbox)
-- JavaScript ES6+ (modules, classes)
+### Backend
+- **Node.js** (v18+) - Runtime environment
+- **Express.js** - Minimal web server for static file serving
+
+### Frontend (Pure Vanilla Stack)
+- **HTML5** - Semantic markup
+- **CSS3** - Custom properties, Grid, Flexbox
+- **JavaScript ES6+** - Modules, classes, native APIs only
+
+## Architecture
+
+The application uses a simple client-server architecture:
+- **Express Server** serves static files from the `public` directory
+- **Frontend** is completely framework-free vanilla JavaScript
+- No API endpoints - all logic runs client-side
+- Server only handles HTTP requests for static assets
 
 ## File Structure
 
 ```
 ai-readiness/
-├── index.html              # Main entry point
-├── css/
-│   └── styles.css          # All styles and responsive design
-├── js/
-│   ├── data.js            # Survey questions and content data
-│   ├── scoring.js         # Scoring algorithm and recommendation logic
-│   ├── survey.js          # Survey flow and UI management
-│   └── main.js            # Application initialization
-├── docs/                   # Documentation (reference materials)
-└── PROJECT_OVERVIEW.md    # This file
+├── server.js               # Express server entry point
+├── package.json            # Node.js dependencies and scripts
+├── public/                 # Static files served by Express
+│   ├── index.html          # Main entry point
+│   ├── css/
+│   │   └── styles.css      # All styles and responsive design
+│   ├── js/
+│   │   ├── data.js         # Survey questions and content data
+│   │   ├── scoring.js      # Scoring algorithm and recommendation logic
+│   │   ├── survey.js       # Survey flow and UI management
+│   │   └── main.js         # Application initialization
+│   ├── assets/
+│   │   └── logo.svg        # Images and assets
+│   └── docs/               # Documentation (reference materials)
+├── .cursorrules            # Development rules
+└── PROJECT_OVERVIEW.md     # This file
 ```
 
 ## Key Components
@@ -127,11 +145,18 @@ Range: 1.0 - 5.0
 
 ## Usage
 
-1. Open `index.html` in a modern web browser
-2. Read the introduction and click "Start Assessment"
-3. Answer all 5 questions in each category (9 categories total)
-4. Navigate between categories using Previous/Next buttons
-5. View comprehensive results with recommendations
+### Running the Application
+
+1. Install dependencies: `npm install`
+2. Start the server: `npm start`
+3. Open browser at `http://localhost:3000`
+
+### Using the Assessment
+
+1. Read the introduction and click "Start Assessment"
+2. Answer all 5 questions in each category (9 categories total)
+3. Navigate between categories using Previous/Next buttons
+4. View comprehensive results with recommendations
 
 ## Browser Compatibility
 
@@ -142,11 +167,18 @@ Range: 1.0 - 5.0
 
 ## Development Principles
 
-- No external dependencies
+### Backend
+- Minimal server - only static file serving
+- No database required (client-side only)
+- No API endpoints (unless future features require it)
+- Express.js as the only server dependency
+
+### Frontend
+- Zero frontend framework dependencies
 - Mobile-first responsive design
 - Semantic HTML5
 - Accessible UI (ARIA attributes where needed)
-- Clean, maintainable code
+- Clean, maintainable vanilla JavaScript
 - Performance optimized
 
 ## Future Enhancement Ideas

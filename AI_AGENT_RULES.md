@@ -4,14 +4,20 @@
 
 ## 🚫 ABSOLUTE PROHIBITIONS
 
-### NO External Dependencies
+### NO External Frontend Dependencies
 - ❌ React, Vue, Angular, Svelte - **FORBIDDEN**
 - ❌ jQuery, Lodash, Moment.js - **FORBIDDEN**
 - ❌ Bootstrap, Tailwind, Bulma - **FORBIDDEN**
 - ❌ Sass, Less, PostCSS - **FORBIDDEN**
 - ❌ Webpack, Vite, Parcel - **FORBIDDEN**
 - ❌ TypeScript - **FORBIDDEN** (use vanilla JS)
-- ❌ Node modules - **FORBIDDEN** (unless critical and approved)
+
+### Backend - Minimal Only
+- ✅ Express.js - **ALLOWED** (for static file serving)
+- ❌ NO databases (MongoDB, PostgreSQL, etc.)
+- ❌ NO API frameworks (unless explicitly required)
+- ❌ NO ORM/ODM libraries
+- ❌ Keep server.js as simple as possible
 
 ### Language Requirement
 - ❌ **NEVER** use Russian, Ukrainian, or any non-English text in UI
@@ -20,6 +26,13 @@
 - ✅ **ALWAYS** use English for variable/function names
 
 ## ✅ WHAT TO USE
+
+### Backend
+- ✅ Node.js (v18+)
+- ✅ Express.js for static file serving
+- ✅ ES6 modules (import/export)
+- ✅ Minimal configuration
+- ✅ Environment variables for config
 
 ### HTML
 - ✅ Pure HTML5
@@ -251,20 +264,26 @@ element.animate(
 When creating new files, use this structure:
 ```
 project/
-├── index.html
-├── css/
-│   ├── variables.css    (CSS custom properties)
-│   ├── reset.css        (CSS reset)
-│   ├── layout.css       (Grid, flexbox, containers)
-│   ├── components.css   (Buttons, cards, etc.)
-│   └── utilities.css    (Helper classes)
-├── js/
-│   ├── main.js          (Entry point)
-│   ├── utils.js         (Helper functions)
-│   └── [feature].js     (Feature-specific code)
-└── assets/
-    ├── images/
-    └── icons/
+├── server.js            (Express server - minimal)
+├── package.json         (Node.js dependencies)
+├── .env                 (Environment variables - gitignored)
+└── public/              (Static files served by Express)
+    ├── index.html       (Main entry point)
+    ├── css/
+    │   ├── variables.css    (CSS custom properties)
+    │   ├── reset.css        (CSS reset)
+    │   ├── layout.css       (Grid, flexbox, containers)
+    │   ├── components.css   (Buttons, cards, etc.)
+    │   └── utilities.css    (Helper classes)
+    ├── js/
+    │   ├── main.js          (Entry point)
+    │   ├── utils.js         (Helper functions)
+    │   └── [feature].js     (Feature-specific code)
+    ├── assets/
+    │   ├── images/
+    │   └── icons/
+    └── docs/
+        └── ...          (Documentation files)
 ```
 
 ## 🎨 UI/UX PRINCIPLES
